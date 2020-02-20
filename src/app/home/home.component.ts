@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     currentUser: User;
     currentUserSubscription: Subscription;
     users: User[] = [];
+// Search the tags in the DOM
+  bodyTag: HTMLBodyElement = document.getElementsByTagName('body')[0];
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -25,11 +27,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loadAllUsers();
+         // remove the the body classes
+        this.bodyTag.classList.remove('background-body');
     }
 
     ngOnDestroy() {
         // unsubscribe to ensure no memory leaks
         this.currentUserSubscription.unsubscribe();
+        
     }
 
     deleteUser(id: number) {
