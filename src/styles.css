@@ -1,2 +1,7 @@
 /* Add application styles & imports to this file! */
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
+
+body {
+    background: #007bff;
+    background: linear-gradient(to right, #0062E6, #33AEFF);
+}
