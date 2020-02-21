@@ -1,6 +1,6 @@
 import { Component, OnInit , Inject} from '@angular/core';
 import {Router} from "@angular/router";
-import {User} from "../../_model";
+import {Model} from "../../_model";
 import {ApiService} from "../../_services";
 
 @Component({
@@ -10,7 +10,7 @@ import {ApiService} from "../../_services";
 })
 export class ListUserComponent implements OnInit {
 
-  users: User[];
+  users: Model[];
 
   constructor(private router: Router, private apiService: ApiService) { }
 

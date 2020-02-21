@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {User} from "../model/user.model";
+import {User} from "../_model";
 import {Observable} from "rxjs/index";
-import {ApiResponse} from "../model/api.response";
+import {ApiResponse} from "../_model";
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -23,7 +23,7 @@ export class ApiService {
   }
 
   createUser(user: User): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.baseUrl, user);
+    return this.http.post<ApiResponse>(`/users/register`, user);
   }
 
   updateUser(user: User): Observable<ApiResponse> {
