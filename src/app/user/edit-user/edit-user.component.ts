@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {User} from "../../model";
-import {UserService, AuthenticationService, ApiService} from "../../_services";
+import {UserService, AuthenticationService, } from "../../_services";
 
 @Component({
   selector: 'app-edit-user',
@@ -12,12 +12,11 @@ import {UserService, AuthenticationService, ApiService} from "../../_services";
 })
 export class EditUserComponent implements OnInit {
 
-  user: User= {};
+  user: User;
   editForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private apiService: ApiService,
     private authenticationService: AuthenticationService,
     private userService: UserService
         ) { }
