@@ -1,6 +1,12 @@
-<div class="col-md-6 user-container">
-  <h2 style="margin: auto"> User Details</h2>
-  <button class="btn btn-danger" style="width:100px" (click)="addUser()"> Add User</button>
+
+
+
+<div class="container">
+
+  <h2 style="margin: auto"> User Details : 
+    <button class="btn btn-danger" style="width:100px" (click)="addUser()"> Add User</button>
+  </h2>
+  
   <table class="table table-striped">
     <thead>
     <tr>
@@ -9,6 +15,8 @@
       <th>LastName</th>
       <th>UserName</th>
       <th>Age</th>
+      <th>Salary</th>
+      <th>Salary</th>
       <th>Salary</th>
     </tr>
     </thead>
@@ -20,9 +28,10 @@
       <td>{{user.username}}</td>
       <td>{{user.age}}</td>
       <td>{{user.salary}}</td>
-      <td><button class="btn btn-success" (click)="deleteUser(user)"> Delete</button>
-        <button class="btn btn-success" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
+      <td><button class="btn btn-success" (click)="deleteUser(user)"> Delete</button></td>
+       <td> <button class="btn btn-success" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
     </tr>
     </tbody>
   </table>
 </div>
+

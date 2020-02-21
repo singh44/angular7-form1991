@@ -1,35 +1,57 @@
-import { Component, OnInit , Inject} from '@angular/core';
+import { Component, OnInit ,OnDestroy, Inject} from '@angular/core';
 import {Router} from "@angular/router";
-import {Model} from "../../_model";
-import {ApiService} from "../../_services";
+import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
+import {User} from "../../_model";
+import {UserService, AuthenticationService, ApiService} from "../../_services";
 
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.css']
 })
-export class ListUserComponent implements OnInit {
+export class ListUserComponent implements OnInit, OnDestroy {
 
-  users: Model[];
+  //users: Model[];
+  currentUser: User;
+  currentUserSubscription: Subscription;
+  users: User[] = [];
+// Search the tags in the DOM
+  bodyTag: HTMLBodyElement = document.getElementsByTagName('body')[0];
 
-  constructor(private router: Router, private apiService: ApiService) { }
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private authenticationService: AuthenticationService,
+    private userService: UserService
+    ) { }
 
   ngOnInit() {
-    if(!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-    this.apiService.getUsers()
-      .subscribe( data => {
-        this.users = data.result;
-      });
+    // if(!window.localStorage.getItem('token')) {
+    //   this.router.navigate(['login']);
+    //   return;
+    // }
+     this.loadAllUsers();
+     // remove the the body classes
+     this.bodyTag.classList.remove('background-body');
+    
   }
 
+  ngOnDestroy() {
+        // unsubscribe to ensure no memory leaks
+        //this.currentUserSubscription.unsubscribe();
+        this.bodyTag.classList.add('background-body');
+        
+    }
+
   deleteUser(user: User): void {
-    this.apiService.deleteUser(user.id)
-      .subscribe( data => {
-        this.users = this.users.filter(u => u !== user);
-      })
+      this.userService.delete(user.id).pipe(first()).subscribe(() => {
+            this.loadAllUsers()
+        });
+    // this.apiService.deleteUser(user.id)
+    //   .subscribe( data => {
+    //     this.users = this.users.filter(u => u !== user);
+    //   })
   };
 
   editUser(user: User): void {
@@ -41,4 +63,10 @@ export class ListUserComponent implements OnInit {
   addUser(): void {
     this.router.navigate(['add-user']);
   };
+
+   private loadAllUsers() {
+        this.userService.getAll().pipe(first()).subscribe(users => {
+            this.users = users;
+        });
+    }
 }
