@@ -9,12 +9,12 @@ import {ListUserComponent} from "./user/list-user";
 import { AuthGuard } from './_guards';
 
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: '', component: ListUserComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'add-user', component: AddUserComponent },
     { path: 'edit-user', component: EditUserComponent },
-    { path: 'list-user', component: ListUserComponent },
+   // { path: 'list-user', component: ListUserComponent },
    
     
 
