@@ -2,7 +2,7 @@ import { Component, OnInit , Inject} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
-import {Model} from "../../model";
+import {User} from "../../model";
 import {ApiService} from "../../_services";
 
 @Component({
@@ -12,7 +12,7 @@ import {ApiService} from "../../_services";
 })
 export class EditUserComponent implements OnInit {
 
-  user: Model;
+  user: User;
   editForm: FormGroup;
   constructor(private formBuilder: FormBuilder,private router: Router, private apiService: ApiService) { }
 
