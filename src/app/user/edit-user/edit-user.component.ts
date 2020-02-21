@@ -12,7 +12,7 @@ import {ApiService} from "../../_services";
 })
 export class EditUserComponent implements OnInit {
 
-  user: User;
+  user: User= {};
   editForm: FormGroup;
   constructor(private formBuilder: FormBuilder,private router: Router, private apiService: ApiService) { }
 
@@ -33,7 +33,8 @@ export class EditUserComponent implements OnInit {
     });
     this.apiService.getUserById(+userId)
       .subscribe( data => {
-        this.editForm.setValue(data.result);
+        this.user = data.result;
+        this.editForm.setValue(this.user);
       });
   }
 
