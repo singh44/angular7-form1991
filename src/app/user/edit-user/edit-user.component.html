@@ -4,10 +4,10 @@
 <h5 class="card-title text-center">Edit User Details</h5>
 <form class="form-signin" [formGroup]="editForm" (ngSubmit)="onSubmit()">
    <!-- <div class="hidden"> -->
-      <!-- <input type="hidden" formControlName="id" placeholder="id" name="id" class="form-control" id="id">   -->
-    <!-- </div> -->
+     <input type="hidden" formControlName="id" placeholder="id" name="id" class="form-control" id="id">  
+   <!-- </div> -->
     <div class="form-label-group">
-    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"   placeholder="User Name" readonly="true">
+    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"   placeholder="User Name" >
         <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
             <div *ngIf="f.username.errors.required">Username is required</div>
         </div>

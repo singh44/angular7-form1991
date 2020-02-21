@@ -41,7 +41,7 @@
     </div>
 
     <div class="form-label-group">
-      <input type="password" formControlName="salary" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.salary.errors }"  placeholder="Salary">
+      <input type="number" formControlName="salary" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.salary.errors }"  placeholder="Salary">
           <div *ngIf="submitted && f.salary.errors" class="invalid-feedback">
               <div *ngIf="f.salary.errors.required">Password is required</div>
               <div *ngIf="f.salary.errors.minlength">Password must be at least 6 characters</div>

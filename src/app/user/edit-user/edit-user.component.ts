@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {User} from "../../model";
-import {UserService, AuthenticationService, } from "../../_services";
+import {UserService, AuthenticationService} from "../../_services";
 
 @Component({
   selector: 'app-edit-user',
@@ -30,18 +30,21 @@ export class EditUserComponent implements OnInit {
     }
     this.editForm = this.formBuilder.group({
       id: [''],
-      username: ['', Validators.required],
+      username: [{value: '', disabled:true}, Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      password: [{value: null, disabled:true}],
       age: ['', Validators.required],
       salary: ['', Validators.required]
     });
-    this.userService.getById(+userId)
-      .subscribe( data => {
-        this.user = data.result;
-        this.editForm.setValue(this.user);
-      });
+    this.userService.getById(+userId).pipe(first()).subscribe(user => {
+            this.editForm.setValue(user);
+        });
+
   }
+
+ // convenience getter for easy access to form fields
+    get f() { return this.editForm.controls; }
 
   onSubmit() {
     this.userService.updateUser(this.editForm.value)
