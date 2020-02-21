@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {ApiService} from "../../_services";
+import { first } from 'rxjs/operators';
+import { AlertService, UserService, AuthenticationService, ApiService } from '../../_services';
+
 
 @Component({
   selector: 'app-add-user',
@@ -10,9 +12,24 @@ import {ApiService} from "../../_services";
 })
 export class AddUserComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private router: Router, private apiService: ApiService) { }
+ addForm: FormGroup;
+ loading = false;
+ submitted = false;
 
-  addForm: FormGroup;
+ constructor(
+        private formBuilder: FormBuilder,
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private userService: UserService,
+        private alertService: AlertService,
+        private apiService: ApiService
+    ) {  }
+
+  //constructor(private formBuilder: FormBuilder,private router: Router, private apiService: ApiService) { }
+
+
+ // convenience getter for easy access to form fields
+    get f() { return this.addForm.controls; }
 
   ngOnInit() {
     this.addForm = this.formBuilder.group({
@@ -27,7 +44,29 @@ export class AddUserComponent implements OnInit {
 
   }
 
-  onSubmit() {
+ onSubmit() {
+        this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.addForm.invalid) {
+            return;
+        }
+
+        this.loading = true;
+        this.userService.register(this.addForm.value)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.alertService.success('Registration successful', true);
+                    this.router.navigate(['/home']);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+    }
+
+  onSubmit1() {
     this.apiService.createUser(this.addForm.value)
       .subscribe( data => {
         this.router.navigate(['list-user']);
