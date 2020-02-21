@@ -6,7 +6,17 @@
 
 <div class="container">
   <h2>Hi {{currentUser.firstName}}! logged in</h2>
-  <p>All registered users:</p>            
+  <p>All registered users:</p>      
+
+  <a routerLinkActive="active" 
+       routerLink="/add-user">Add User</a> |
+
+    <a routerLinkActive="active" 
+       routerLink="/edit-user">Edit User</a> | 
+
+    <a routerLinkActive="active" 
+      routerLink="/list-user">List User</a>  |
+
   <table class="table">
     <thead>
       <tr>
