@@ -47,7 +47,7 @@ export class EditUserComponent implements OnInit {
     get f() { return this.editForm.controls; }
 
   onSubmit() {
-    this.userService.updateUser(this.editForm.value)
+    this.userService.update(this.editForm.value)
       .pipe(first())
       .subscribe(
         data => {
