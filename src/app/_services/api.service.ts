@@ -4,7 +4,7 @@ import {User} from "../model/user.model";
 import {Observable} from "rxjs/index";
 import {ApiResponse} from "../model/api.response";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ApiService {
 
   constructor(private http: HttpClient) { }
