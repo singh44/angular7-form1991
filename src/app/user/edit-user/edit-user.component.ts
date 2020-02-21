@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {User} from "../../model";
-import {ApiService} from "../../_services";
+import {UserService, AuthenticationService, ApiService} from "../../_services";
 
 @Component({
   selector: 'app-edit-user',
@@ -14,7 +14,13 @@ export class EditUserComponent implements OnInit {
 
   user: User= {};
   editForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,private router: Router, private apiService: ApiService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private apiService: ApiService,
+    private authenticationService: AuthenticationService,
+    private userService: UserService
+        ) { }
 
   ngOnInit() {
     let userId = window.localStorage.getItem("editUserId");
@@ -31,7 +37,7 @@ export class EditUserComponent implements OnInit {
       age: ['', Validators.required],
       salary: ['', Validators.required]
     });
-    this.apiService.getUserById(+userId)
+    this.userService.getById(+userId)
       .subscribe( data => {
         this.user = data.result;
         this.editForm.setValue(this.user);
@@ -39,7 +45,7 @@ export class EditUserComponent implements OnInit {
   }
 
   onSubmit() {
-    this.apiService.updateUser(this.editForm.value)
+    this.userService.updateUser(this.editForm.value)
       .pipe(first())
       .subscribe(
         data => {
