@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import {User} from "../../_model";
 import {UserService, AuthenticationService, ApiService} from "../../_services";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-user',
@@ -24,7 +25,11 @@ export class ListUserComponent implements OnInit, OnDestroy {
     private apiService: ApiService,
     private authenticationService: AuthenticationService,
     private userService: UserService
-    ) { }
+    ){
+        this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+            this.currentUser = user;
+        });
+    }
 
   ngOnInit() {
     // if(!window.localStorage.getItem('token')) {

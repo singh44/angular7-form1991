@@ -3,7 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import { first } from 'rxjs/operators';
 import { AlertService, UserService, AuthenticationService, ApiService } from '../../_services';
-
+import { Subscription } from 'rxjs';
+import { User } from '../../_models';
 
 @Component({
   selector: 'app-add-user',
@@ -12,6 +13,8 @@ import { AlertService, UserService, AuthenticationService, ApiService } from '..
 })
 export class AddUserComponent implements OnInit {
 
+ currentUser: User;
+ currentUserSubscription: Subscription;
  addForm: FormGroup;
  loading = false;
  submitted = false;
@@ -23,7 +26,11 @@ export class AddUserComponent implements OnInit {
         private userService: UserService,
         private alertService: AlertService,
         private apiService: ApiService
-    ) {  }
+    ){
+        this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+            this.currentUser = user;
+        });
+    }
 
   //constructor(private formBuilder: FormBuilder,private router: Router, private apiService: ApiService) { }
 

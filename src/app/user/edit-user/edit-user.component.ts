@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {User} from "../../model";
 import {UserService, AuthenticationService} from "../../_services";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-user',
@@ -12,14 +13,21 @@ import {UserService, AuthenticationService} from "../../_services";
 })
 export class EditUserComponent implements OnInit {
 
+  currentUser: User;
+  currentUserSubscription: Subscription;
   user: User;
   editForm: FormGroup;
+  
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private authenticationService: AuthenticationService,
-    private userService: UserService
-        ) { }
+        private formBuilder: FormBuilder,
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private userService: UserService
+        ) {
+        this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+            this.currentUser = user;
+        });
+    }
 
   ngOnInit() {
     let userId = window.localStorage.getItem("editUserId");
