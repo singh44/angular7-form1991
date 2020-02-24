@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
 import { fakeBackendProvider } from '../_helpers';
-import { routing }        from '../app.routing';
+import { LoginRoutingModule } from './login-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from '../_helpers';
 import { LoginComponent } from './login.component';
 
@@ -17,7 +17,7 @@ import { LoginComponent } from './login.component';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-   // routing
+    LoginRoutingModule
   ],
 })
 /*
