@@ -11,6 +11,7 @@
 <form class="form-signin" [formGroup]="editForm" (ngSubmit)="onSubmit()">
    <!-- <div class="hidden"> -->
      <input type="hidden" formControlName="id" placeholder="id" name="id" class="form-control" id="id">  
+      <input type="hidden" formControlName="password" placeholder="password" name="password" class="form-control" id="password">  
    <!-- </div> -->
     <div class="form-label-group">
     <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"   placeholder="User Name" >

@@ -15,7 +15,7 @@ export class UserService {
     //     return this.http.get(`/users/` + id);
     // }
 
-       getById(id: number): Observable<ApiResponse>  {
+    getById(id: number): Observable<ApiResponse>  {
         return this.http.get(`/users/` + id);
     }
 
@@ -24,7 +24,7 @@ export class UserService {
         return this.http.post(`/users/register`, user);
     }
 
-    update(user: User) {
+    update(user: User){
         return this.http.put(`/users/` + user.id, user);
     }
 
