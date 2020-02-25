@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from './_services';
 import { User } from './_models';
+import { APP_VERSION } from '../tokens/app-version';
 
 @Component({
    selector: 'app',
@@ -14,7 +15,8 @@ export class AppComponent {
 
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        @Inject(APP_VERSION) public appVersion: string
     ) {
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     }
