@@ -19,7 +19,7 @@ import { RegisterComponent } from './register';
 // import { ListUserComponent } from './user/list-user/list-user.component';
 
 import { UserFormModule } from './user/user.module';
-
+import { APP_VERSION } from './tokens/app-version';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -44,9 +44,12 @@ import { UserFormModule } from './user/user.module';
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
+        { 
+          provide: APP_VERSION, useValue: '1.0.0'// APP_VERSION
+        },
         // provider used to create fake backend
-        fakeBackendProvider
+        fakeBackendProvider,
+
     ]
    
 })
