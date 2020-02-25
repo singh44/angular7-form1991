@@ -44,9 +44,7 @@ import { APP_VERSION } from './tokens/app-version';
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        { 
-          provide: APP_VERSION, useValue: '1.0.0'// APP_VERSION
-        },
+        { provide: APP_VERSION, useValue: '1.0.0'},
         // provider used to create fake backend
         fakeBackendProvider,
 
