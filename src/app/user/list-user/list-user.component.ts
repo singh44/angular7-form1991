@@ -33,7 +33,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
 
  // convenience getter for easy access to form fields
-    get f() { return this.editForm.controls; }
+    //get f() { return this.editForm.controls; }
     
   ngOnInit() {
     // if(!window.localStorage.getItem('token')) {
