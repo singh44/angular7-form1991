@@ -12,15 +12,12 @@ import { routing }        from './app.routing';
 import { AlertComponent } from './_components';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
-//import { LoginComponent } from './login';
+import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { ListUserComponent } from './user/list-user/list-user.component';
 
-// used to create custom module
-//import { LoginFormModule } from './login.';
-import { LoginFormModule } from './login';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -28,15 +25,13 @@ import { LoginFormModule } from './login';
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        routing,
-        LoginFormModule,
-        
+        routing 
     ],
     declarations: [
         AppComponent,
         AlertComponent,
         HomeComponent,
-        //LoginComponent,
+        LoginComponent,
         RegisterComponent,
         AddUserComponent,
         EditUserComponent,
