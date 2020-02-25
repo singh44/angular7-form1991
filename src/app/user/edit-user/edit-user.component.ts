@@ -46,8 +46,8 @@ export class EditUserComponent implements OnInit {
       password: [{value: '', disabled:true}],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      age: ['', Validators.required],
-      salary: ['', Validators.required]
+      age: ['', [Validators.required,Validators.min(18), Validators.max(99)]],
+      salary: ['', [Validators.required,Validators.min(1000), Validators.max(100000)]]
     });
 
     this.loading = true;
