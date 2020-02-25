@@ -50,10 +50,16 @@ export class EditUserComponent implements OnInit {
       salary: ['', Validators.required]
     });
 
+    this.loading = true;
     this.userService.getById(+userId)
     .pipe(first())
-    .subscribe(user => {
+    .subscribe(
+       user => {
             this.editForm.setValue(user);
+             this.loading = false;
+       },
+       error => {
+                   this.loading = false;
      });
 
   }
