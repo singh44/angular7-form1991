@@ -1,23 +1,24 @@
+
 <!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end" *ngIf="currentUser">
+    <a class="navbar-brand nav-link" routerLink="/">Home</a>
+    <button class="btn btn-success ml-auto mr-1">{{currentUser.firstName}}  {{currentUser.lastName}}</button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+        <ul class="navbar-nav text-right">
+            <li class="nav-item active">
+                <a class="nav-link" (click)="logout()">Logout</a>
+            </li>
+            <!-- <li class="nav-item active">
+                <a class="nav-link" href="#">Right Link 2</a>
+            </li> -->
+        </ul>
     </div>
 </nav>
 
 <!-- main app container -->
-
-
-<!-- <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto"> -->
-       
-            <alert></alert>
-            <router-outlet></router-outlet>
-         
-      <!-- </div>
-    </div>
-  </div> -->
-
+<alert></alert>
+<router-outlet></router-outlet>
 

@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from './_services';
 import { User } from './_models';
-/import { APP_VERSION } from '../tokens/app-version';
+//import { APP_VERSION } from '../tokens/app-version';
 
 @Component({
    selector: 'app',
-   templateUrl: 'app.component.html'
+   templateUrl: 'app.component.html',
+   styleUrls: ['app.component.css']
 })
 
 export class AppComponent {
