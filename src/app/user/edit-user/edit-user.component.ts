@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {User} from "../../model";
-import {UserService, AuthenticationService,AlertService} from "../../_services";
+import {UserService, AuthenticationService,AlertService,CommonService} from "../../_services";
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,6 +19,7 @@ export class EditUserComponent implements OnInit {
   editForm: FormGroup;
   loading = false;
   submitted = false;
+  editUserId:any;
 
   constructor(
         private formBuilder: FormBuilder,
@@ -26,12 +27,47 @@ export class EditUserComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private userService: UserService,
         private alertService: AlertService,
+         private commonService: CommonService
         ) {
         this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
             this.currentUser = user;
         });
     }
 
+
+     ngOnInit() {
+        // let userId = window.localStorage.getItem("editUserId");
+        this.editUserId = this.commonService.getData();
+        if(this.editUserId == undefined) {
+          alert("Invalid action.")
+          this.router.navigate(['list-user']);
+          return;
+        }
+
+        this.editForm = this.formBuilder.group({
+          id: [],
+          username: [{value: '', disabled:true}, Validators.required],
+          password: [{value: '', disabled:true}],
+          firstName: ['', Validators.required],
+          lastName: ['', Validators.required],
+          age: ['', [Validators.required,Validators.min(18), Validators.max(99)]],
+          salary: ['', [Validators.required,Validators.min(1000), Validators.max(100000)]]
+        });
+
+        this.loading = true;
+        this.userService.getById(+this.editUserId)
+        .pipe(first())
+        .subscribe(
+          user => {
+                this.editForm.setValue(user);
+                this.loading = false;
+          },
+          error => {
+                      this.loading = false;
+        });
+  }
+
+/*
   ngOnInit() {
     let userId = window.localStorage.getItem("editUserId");
     if(!userId) {
@@ -63,7 +99,7 @@ export class EditUserComponent implements OnInit {
      });
 
   }
-
+*/
  // convenience getter for easy access to form fields
     get f() { return this.editForm.controls; }
 

@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import {User} from "../../_model";
-import {UserService, AuthenticationService, ApiService} from "../../_services";
+import {UserService, AuthenticationService, ApiService,CommonService} from "../../_services";
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -24,7 +24,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
     private router: Router,
     private apiService: ApiService,
     private authenticationService: AuthenticationService,
-    private userService: UserService
+    private userService: UserService,
+    private commonService: CommonService
     ){
         this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
             this.currentUser = user;
@@ -66,6 +67,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
   editUser(user: User): void {
     window.localStorage.removeItem("editUserId");
     window.localStorage.setItem("editUserId", user.id.toString());
+     this.commonService.setData(user.id.toString());
     this.router.navigate(['edit-user']);
   };
 
